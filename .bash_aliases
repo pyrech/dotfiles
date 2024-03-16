@@ -50,8 +50,11 @@ alias whatsmypc="inxi -Fxz"
 ## Fun
 alias meteo="curl wttr.in/Paris?format=v2"
 
+# Git
+alias g="git"
+alias gd="git diff -M"
+alias gst="git st"
+alias gdca="git diff --cached -M"
+
 ## PHP
 alias php_opcode='php -n -d "extension=vld.so" -d "vld.active=1" -d "vld.execute=0"'
-
-## Random
-alias protips="code /home/gregoire/Dropbox/doc/CFP/idea/Protips.md"

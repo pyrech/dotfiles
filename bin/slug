@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require '/home/gregoire/dev/github.com/symfony/string/vendor/autoload.php';
+require '/home/loick/Work/symfony/string/vendor/autoload.php';
 
 use Symfony\Component\String\Slugger\AsciiSlugger;
 

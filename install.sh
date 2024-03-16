@@ -23,14 +23,19 @@ ln -sf $DOTFILES/.profile             ~/.profile
 ln -sf $DOTFILES/.psqlrc              ~/.psqlrc
 ln -sf $DOTFILES/.ripgreprc           ~/.ripgreprc
 ln -sf $DOTFILES/.screenrc            ~/.screenrc
-ln -sf $DOTFILES/.tmux.conf           ~/.tmux.conf
 ln -sf $DOTFILES/.vimrc               ~/.vimrc
-ln -sf $DOTFILES/git-template ~/.git-template
+ln -sf $DOTFILES/git-template         ~/.git-template
 
 echo 'Install git submodule'
 if [[ `which git` ]] ; then
   git submodule update --init
   ln -sf $DOTFILES/vendor/dircolors-solarized/dircolors.ansi-dark  ~/.dir_colors
+fi
+
+echo 'Setup dnsmasq'
+if [[ -d /etc/dnsmasq.d ]] ; then
+  ln -sf $DOTFILES/dnsmasq/localhost  /etc/dnsmasq.d/localhost
+  ln -sf $DOTFILES/dnsmasq/test  /etc/dnsmasq.d/test
 fi
 
 echo 'Create custom bin symlink'
@@ -40,10 +45,11 @@ ln -sf $DOTFILES/bin/\$                         /$HOME/.local/bin/\$
 ln -sf $DOTFILES/bin/git-new                    /$HOME/.local/bin/git-new
 ln -sf $DOTFILES/bin/json_pp                    /$HOME/.local/bin/json_pp
 ln -sf $DOTFILES/bin/remove-csi                 /$HOME/.local/bin/remove-csi
-ln -sf $DOTFILES/bin/tmux-start                 /$HOME/.local/bin/tmux-start
 ln -sf $DOTFILES/bin/slug                       /$HOME/.local/bin/slug
 
 if [[ `which php` ]] ; then
+    ln -sf $DOTFILES/php/my.ini  /etc/php/8.2/cli/conf.d/my.ini
+
     if [[ ! -f $HOME/.local/bin/composer ]]; then
         echo 'Install composer'
         curl -sS https://getcomposer.org/installer | php

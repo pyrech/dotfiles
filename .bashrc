@@ -18,8 +18,8 @@ if [[ -d /usr/local/go/bin ]]; then
     PATH=$PATH:/usr/local/go/bin
 fi
 
-if [[ -d $HOME/dev/go ]]; then
-    export GOPATH=$HOME/dev/go
+if [[ -d $HOME/Work/go ]]; then
+    export GOPATH=$HOME/Work/go
     PATH=$PATH:/$GOPATH/bin
 fi
 
@@ -39,12 +39,8 @@ if [[ -d $HOME/.yarn/bin/ ]]; then
     PATH="$PATH:$HOME/.yarn/bin/"
 fi
 
-if [[ -d $HOME/dev/github.com ]]; then
-    export CDPATH=".:$HOME:$HOME/dev/github.com"
-fi
-
-if [[ -f /usr/bin/terraform ]]; then
-    complete -C /usr/bin/terraform terraform
+if [[ -d $HOME/Work ]]; then
+    export CDPATH=".:$HOME:$HOME/Work"
 fi
 
 if [ -f $HOME/.ripgreprc ] ; then
@@ -58,6 +54,7 @@ export HISTSIZE=50000
 export HISTFILESIZE=${HISTSIZE}
 export HISTIGNORE="ls:cd:[bf]g:exit"
 export HISTCONTROL="ignoreboth" # ignore duplicate line + line which start by a space
+export HISTTIMEFORMAT="%F %T " # add date to the history
 
 export ANSIBLE_STDOUT_CALLBACK=debug
 export BUILDKIT_PROGRESS=plain
@@ -68,7 +65,7 @@ export DOCKER_BUILDKIT=1
 if [[ `which most` ]]; then export PAGER=`which most` ; fi
 export LESS="FRSX"
 
-export EDITOR=`which vim`
+export EDITOR=`which nano`
 
 # 0 : normal, 1 : bold, 4 underline, nothing : background
 NoColor="\[\e[0m\]"
@@ -113,6 +110,21 @@ if [[ `which dircolors` ]]; then
         eval `dircolors --bourne-shell ~/.dir_colors`
     fi
 fi
+
+# Autocompletion tweaks
+bind 'set completion-ignore-case on' # case insensitive completion
+bind 'TAB:menu-complete' # loop through the completion list
+bind '"\e[Z": menu-complete-backward' # loop through the completion list backward
+bind "set show-all-if-ambiguous on" # show completion list
+# Perform partial (common) completion on the first Tab press, only start
+# cycling full results on the second Tab press (from bash version 5)
+bind "set menu-complete-display-prefix on"
+# Cycle through history based on characters already typed on the line
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+# Keep Ctrl-Left and Ctrl-Right working when the above are used
+bind '"\e[1;5C":forward-word'
+bind '"\e[1;5D":backward-word'
 
 # Autocomple with sudo
 complete -cf sudo

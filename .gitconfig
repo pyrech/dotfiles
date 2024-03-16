@@ -1,6 +1,6 @@
 [user]
-    name            = Grégoire Pineau
-    email           = lyrixx@lyrixx.info
+    name            = Loïck Piera
+    email           = pyrech@gmail.com
 [alias]
     st              = status
     ci              = commit
@@ -24,12 +24,13 @@
     rebt            = rebase --abort
     rebs            = rebase --skip
     new             = ! git-new "$@"
+    push-with-lease = push --force-with-lease --force-if-includees
     php-lint        = ! cd -- ${GIT_PREFIX:-.} && git status --short | /bin/grep -e '^[AUM ][UM ].*\\.php$' | awk '{print $2}' | xargs --no-run-if-empty -L 1 php -l
     php-cs-fixer    = ! cd -- ${GIT_PREFIX:-.} && git status --short | /bin/grep -e '^[AUM ][UM ].*\\.php$' | awk '{print $2}' | xargs --no-run-if-empty -L 1 php $(which php-cs-fixer) fix --quiet
     eslint          = ! cd -- ${GIT_PREFIX:-.} && git status --short | /bin/grep -e '^[AUM ][UM ].*\\.\\(js\\|jsx\\|ts\\|tsx\\)$' | awk '{print $2}' | xargs --no-run-if-empty -L 1 eslint --fix
     notes-fetch     = fetch origin refs/notes/*:refs/notes/*
     notes-push      = push origin refs/notes/*
-    daily           = log --no-merges --all --author='Grégoire Pineau' --since='midnight yesterday' --format='%s'
+    daily           = log --no-merges --all --author='Loïck Piera' --since='midnight yesterday' --format='%s'
     reopen          = ! git diff-tree --no-commit-id -r ${1:-HEAD} | cut -d ' ' -f 5-6 | /bin/grep -v "^D" | awk '{print $2}' | xargs --no-run-if-empty code
     open            = ! git status -s --no-renames | /bin/grep -v "^D" | awk '{print $2}' | xargs --no-run-if-empty code
     open-conflict   = ! git status -s | /bin/grep ^UU | awk '{print $2}' | xargs --no-run-if-empty code
@@ -42,18 +43,22 @@
     pager           = less -F -X
 [branch]
     autosetupmerge  = false
+    autosetuprebase = always
     rebase          = true
 [diff]
     algorithm       = histogram
 [commit]
+    gpgsign         = true
     verbose         = true
 [merge]
+    ff              = only
     summary         = true
     conflictstyle   = zdiff3
 [rebase]
     updateRefs      = true
     autosquash      = true
     autostash       = true
+    autorebase      = true
 [rerere]
     enabled         = true
 [github]
