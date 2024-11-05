@@ -62,7 +62,7 @@
 [rerere]
     enabled         = true
 [github]
-    user            = lyrixx
+    user            = pyrech
 [push]
     default         = tracking
     autoSetupRemote = true

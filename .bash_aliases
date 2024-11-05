@@ -14,6 +14,8 @@ alias mv="mv -i"
 
 alias grep='grep --color=tty'
 
+alias peek='peek -b ffmpeg'
+
 alias PS1="grep '#PS1' ~/.bashrc | sed 's/^#\(.*\)/\1/'"
 
 ## Notification
